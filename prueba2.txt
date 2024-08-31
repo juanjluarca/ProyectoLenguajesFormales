@@ -1,0 +1,8 @@
+entero x = 10;
+decimal y = 5.5;
+si (x > y) {
+    cadena mensaje = "x es mayor que y;
+    sinon {
+        cadena mensaje = "x no es mayor que y";
+    }
+}

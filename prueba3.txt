@@ -1,0 +1,9 @@
+booleano flag = verdadero;
+entero contador = 0;
+
+mientras (contador <= 10) {
+    contador = contador + 1;
+    hacer {
+        entero temporal = contador * 2;
+    }
+}

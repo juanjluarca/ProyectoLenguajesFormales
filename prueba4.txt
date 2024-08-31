@@ -1,0 +1,8 @@
+decimal pi = 3.14159;
+si (pi >= 3) {
+    hacer {
+        entero num = 3*3/2;
+        cadena resultado = "Resultado es correcto";
+        x4!2# = 100;
+    }
+}
