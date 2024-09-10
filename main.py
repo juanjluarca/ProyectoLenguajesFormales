@@ -56,8 +56,10 @@ class LexicalAnalyzerGUI(QMainWindow):
 
         # Definición y compilación de expresiones regulares
         self.token_specification = [
+            ('COMENTARIO_MULTILINEA', r'/\*.*?\*/'),
+            ('COMENTARIO_LINEA', r'//.*'),
             ('PALABRA_RESERVADA', r'\b(entero|decimal|booleano|cadena|si|sino|mientras|hacer|verdadero|falso)\b'),
-            ('OPERADOR_LOGICO', r'(<=|>=|==|<>|<|>)'),
+            ('OPERADOR_LOGICO', r'(<=|>=|==|<>|<|>|&&|\|\||&|\||!)'),  # Se añadieron &, |, !
             ('OPERADOR_ARITMETICO', r'(\+|\-|\*|\/|\%)'),
             ('ASIGNACION', r'='),
             ('PUNTO_Y_COMA', r';'),
@@ -120,7 +122,7 @@ class LexicalAnalyzerGUI(QMainWindow):
                     if value.count('"') % 2 != 0:
                         errors.append(f"Línea {line_num}: Cadena no cerrada correctamente '{value}'")
                 else:
-                    # Procesar y almacenar tokens
+                    # Procesar y almacenar tokens (incluyendo comentarios)
                     key = (value, type_)
                     if key in tokens_found:
                         tokens_found[key] += 1

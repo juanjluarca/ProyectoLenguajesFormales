@@ -1,0 +1,21 @@
+entero main() {
+    entero x = 10;
+    entero y = 20;
+    entero z = x + y;
+    booleano l = falso
+    
+    si (x > y)  {
+        imprimir("x es mayor que y");
+    } sino {
+        imprimir("x no es mayor que y");
+    }
+    
+    hacer (x < 15) {
+        x = x + 1;  /* Incrementar x */
+    }
+    
+    si (x >= 10 && y <= 20 || z != 30) {
+        imprimir("Condición lógica cumplida");
+    }
+    
+}

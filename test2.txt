@@ -1,0 +1,26 @@
+/* Inicio del programa */
+entero main() {
+    entero x = 10; // Declaración de variable
+    entero y = 20;
+    entero z = x + y;
+    booleano l = falso
+    
+    /* Condición para verificar si x es mayor que y */
+    si (x > y)  {
+        imprimir("x es mayor que y");
+    } sino {
+        imprimir("x no es mayor que y");
+    }
+    
+    /* Bucle para incrementar x hasta 15 */
+    hacer (x < 15) {
+        x = x + 1;  /* Incrementar x */
+    }
+    
+    /* Uso de operadores lógicos */
+    si (x >= 10 && y <= 20 || z != 30) {
+        imprimir("Condición lógica cumplida");
+    }
+    
+    /* Fin del programa */
+}
