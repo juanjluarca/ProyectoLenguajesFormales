@@ -3,9 +3,10 @@ import re
 from PyQt5.QtWidgets import (
     QApplication, QMainWindow, QWidget, QVBoxLayout, QPushButton,
     QLabel, QTextEdit, QFileDialog, QTableWidget, QTableWidgetItem,
-    QMessageBox
+    QMessageBox, QSizePolicy, QHeaderView
 )
 from PyQt5.QtCore import Qt
+from PyQt5.QtGui import QPalette, QColor
 
 
 class LexicalAnalyzerGUI(QMainWindow):
@@ -14,7 +15,12 @@ class LexicalAnalyzerGUI(QMainWindow):
 
         # Configuración de la ventana principal
         self.setWindowTitle('Analizador Léxico')
-        self.setGeometry(100, 100, 900, 700)
+        self.setGeometry(100, 100, 900, 850)
+
+        # Cambiar el color de fondo a gris
+        self.setAutoFillBackground(True)
+        palette = self.palette()
+        self.setPalette(palette)
 
         # Contenedor principal
         central_widget = QWidget(self)
@@ -23,8 +29,9 @@ class LexicalAnalyzerGUI(QMainWindow):
 
         # Botón para cargar el archivo
         self.load_button = QPushButton('Cargar Archivo', self)
+        self.load_button.setFixedSize(100, 50)
         self.load_button.clicked.connect(self.load_file)
-        layout.addWidget(self.load_button)
+        layout.addWidget(self.load_button, alignment=Qt.AlignCenter)  # Centrando el botón
 
         # Área de texto para mostrar el contenido del archivo
         self.text_area = QTextEdit(self)
@@ -33,13 +40,24 @@ class LexicalAnalyzerGUI(QMainWindow):
 
         # Botón para iniciar el análisis léxico
         self.analyze_button = QPushButton('Analizar', self)
+        self.analyze_button.setFixedSize(100, 50)
         self.analyze_button.clicked.connect(self.analyze_text)
-        layout.addWidget(self.analyze_button)
+        layout.addWidget(self.analyze_button, alignment=Qt.AlignCenter)  # Centrando el botón
 
         # Tabla para mostrar los tokens
         self.token_table = QTableWidget(self)
+        self.token_table.setFixedSize(900, 300)
         self.token_table.setColumnCount(3)
         self.token_table.setHorizontalHeaderLabels(['Token', 'Tipo', 'Cantidad'])
+
+        # Expansión de la tabla para ocupar toda la ventana
+        self.token_table.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+
+
+        # Hacer que las columnas se ajusten todas al mismo tamaño
+        header = self.token_table.horizontalHeader()
+        header.setSectionResizeMode(QHeaderView.Stretch)
+
         layout.addWidget(self.token_table)
 
         # Etiqueta para mostrar los errores léxicos
@@ -59,7 +77,7 @@ class LexicalAnalyzerGUI(QMainWindow):
             ('COMENTARIO_MULTILINEA', r'/\*.*?\*/'),
             ('COMENTARIO_LINEA', r'//.*'),
             ('PALABRA_RESERVADA', r'\b(entero|decimal|booleano|cadena|si|sino|mientras|hacer|verdadero|falso)\b'),
-            ('OPERADOR_LOGICO', r'(<=|>=|==|<>|<|>|&&|\|\||&|\||!)'),  # Se añadieron &, |, !
+            ('OPERADOR_LOGICO', r'(<=|>=|==|<>|<|>|&&|\|\||&|\||!)'),
             ('OPERADOR_ARITMETICO', r'(\+|\-|\*|\/|\%)'),
             ('ASIGNACION', r'='),
             ('PUNTO_Y_COMA', r';'),
